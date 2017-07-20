@@ -271,3 +271,4 @@ BUG FIXES
 
     (Jira in Apache Spark is IN PROGRESS)
     BUG-88428 SPARK-21549 Spark fails to complete job correctly in case of OutputFormat which do not write into hdfs
+  SPARK-19531   Send UPDATE_LENGTH for Spark History service
