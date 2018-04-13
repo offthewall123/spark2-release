@@ -314,6 +314,11 @@ package object config {
       .stringConf
       .createWithDefaultString("1; mode=block")
 
+  private[spark] val AUTH_SECRET_BIT_LENGTH =
+    ConfigBuilder("spark.authenticate.secretBitLength")
+      .intConf
+      .createWithDefault(256)
+
   private[spark] val UI_X_CONTENT_TYPE_OPTIONS =
     ConfigBuilder("spark.ui.xContentTypeOptions.enabled")
       .doc("Set to 'true' for setting X-Content-Type-Options HTTP response header to 'nosniff'")
