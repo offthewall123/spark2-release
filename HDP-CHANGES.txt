@@ -125,3 +125,4 @@ BUG FIXES
     SPARK-27051 Bump Jackson version to 2.9.8
     SPARK-27757 Bump Jackson to 2.9.9
     HOTFIX-2419 Bump Jackson to 2.9.9.1
+  SPARK-24110   Avoid UGI.loginUserFromKeytab in STS
