@@ -123,3 +123,4 @@ BUG FIXES
     SPARK-23635 Spark executor env variable is overwritten by same name AM env variable
   SPARK-24110   Avoid UGI.loginUserFromKeytab in STS
   SPARK-24334   Fix race condition in ArrowPythonRunner causes unclean shutdown of Arrow memory allocator
+  SPARK-24002   Task not serializable caused by org.apache.parquet.io.api.Binary$ByteBufferBackedBinary.getBytes
