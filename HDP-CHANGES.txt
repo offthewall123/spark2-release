@@ -39,6 +39,7 @@ BUG FIXES
     BUG-99700   Remove unused Hive versions from VersionsSuite
     BUG-99560   Enable `kafka-0-8` build in atlantic by using Kafka `0.10.1.2.6.4.0-91`
     BUG-100134  Revert `[SPARK-22919] Bump httpclient versions` to avoid conflicts with AWS library
+    BUG-103408  ORC-306 `TimestampColumnVector.time` is different from ORC 1.4.3
 
     (Backport from 2.3.1)
     SPARK-23475 Show also skipped stages
