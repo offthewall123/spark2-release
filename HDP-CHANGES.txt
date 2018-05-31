@@ -113,6 +113,7 @@ BUG FIXES
     SPARK-24062 Fix SASL encryption cannot enabled issue in thrift server
     BUG-102285 Update py4j to version 0.10.7.
     BUG-102285 Match pyspark features in SparkR communication protocol.
+    BUG-112466 [WEBUI] Avoid possibility of script in query param keys
 
     (Backport from 2.4)
     SPARK-23228 Add Python Created jsparkSession to JVM's defaultSession
