@@ -83,3 +83,4 @@ BUG FIXES
 
     (Jira in Apache Spark is IN PROGRESS)
     SPARK-23977 Add commit protocol binding to Hadoop 3.1 PathOutputCommitter mechanism
+  SPARK-24613   Cache with UDF could not be matched with subsequent dependent caches
