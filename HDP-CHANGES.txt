@@ -122,3 +122,4 @@ BUG FIXES
     SPARK-23518 Avoid metastore access when the users only want to read and write data frames
     SPARK-23635 Spark executor env variable is overwritten by same name AM env variable
   SPARK-24589   Correctly identify tasks in output commit coordinator.
+  SPARK-24552   Use unique id instead of attempt number for writes .
