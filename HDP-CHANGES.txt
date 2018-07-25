@@ -85,3 +85,4 @@ BUG FIXES
     SPARK-23977 Add commit protocol binding to Hadoop 3.1 PathOutputCommitter mechanism
   SPARK-24613   Cache with UDF could not be matched with subsequent dependent caches
   SPARK-24891   Fix HandleNullInputsForUDF rule
+  SPARK-24891   Fix the Compilation Errors
