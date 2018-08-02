@@ -586,6 +586,11 @@ They are generally private services, and should only be accessible within the ne
 organization that deploys Spark. Access to the hosts and ports used by Spark services should
 be limited to origin hosts that need to access the services.
 
+Generally speaking, a Spark cluster and its services are not deployed on the public internet.
+They are generally private services, and should only be accessible within the network of the
+organization that deploys Spark. Access to the hosts and ports used by Spark services should
+be limited to origin hosts that need to access the services.
+
 Below are the primary ports that Spark uses for its communication and how to
 configure those ports.
 
