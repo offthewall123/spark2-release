@@ -128,3 +128,4 @@ BUG FIXES
     SPARK-25368 Incorrect predicate pushdown returns wrong result
     SPARK-26682 Use taskAttemptID instead of attemptNumber for Hadoop.
     SPARK-27160 Fix DecimalType when building orc filters
+  SPARK-24981   ShutdownHook timeout causes job to fail when succeeded when SparkContext stop() not called by user program
