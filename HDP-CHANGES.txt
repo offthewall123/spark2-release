@@ -124,3 +124,4 @@ BUG FIXES
 
     (Backport from 2.4)
     SPARK-26208 [SQL] add headers to empty csv files when header=true
+    SPARK-26122 [SQL] Support encoding for multiLine in CSV datasource

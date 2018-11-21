@@ -237,8 +237,9 @@ private[csv] object UnivocityParser {
   def tokenizeStream(
       inputStream: InputStream,
       shouldDropHeader: Boolean,
-      tokenizer: CsvParser): Iterator[Array[String]] = {
-    convertStream(inputStream, shouldDropHeader, tokenizer)(tokens => tokens)
+      tokenizer: CsvParser,
+      encoding: String): Iterator[Array[String]] = {
+    convertStream(inputStream, shouldDropHeader, tokenizer, encoding)(tokens => tokens)
   }
 
   /**
@@ -255,7 +256,7 @@ private[csv] object UnivocityParser {
       parser.options.parseMode,
       schema,
       parser.options.columnNameOfCorruptRecord)
-    convertStream(inputStream, shouldDropHeader, tokenizer) { tokens =>
+    convertStream(inputStream, shouldDropHeader, tokenizer, parser.options.charset) { tokens =>
       safeParser.parse(tokens)
     }.flatten
   }
@@ -263,8 +264,9 @@ private[csv] object UnivocityParser {
   private def convertStream[T](
       inputStream: InputStream,
       shouldDropHeader: Boolean,
-      tokenizer: CsvParser)(convert: Array[String] => T) = new Iterator[T] {
-    tokenizer.beginParsing(inputStream)
+      tokenizer: CsvParser,
+      encoding: String)(convert: Array[String] => T) = new Iterator[T] {
+    tokenizer.beginParsing(inputStream, encoding)
     private var nextRecord = {
       if (shouldDropHeader) {
         tokenizer.parseNext()
