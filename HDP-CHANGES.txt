@@ -77,3 +77,4 @@ BUG FIXES
 
     (Security fix in Apache Spark)
     BUG-110890 Fix a security issue createRDDFromFile - large object ser/deserialization between R / JVM
+  ][SPARK-26118   Introducing spark.ui.requestHeaderSize for setting HTTP requestHeaderSize
