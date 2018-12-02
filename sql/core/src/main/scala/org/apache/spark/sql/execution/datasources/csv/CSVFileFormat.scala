@@ -17,6 +17,8 @@
 
 package org.apache.spark.sql.execution.datasources.csv
 
+import java.nio.charset.Charset
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileStatus, Path}
 import org.apache.hadoop.mapreduce._
@@ -146,11 +148,25 @@ private[csv] class CsvOutputWriter(
     context: TaskAttemptContext,
     params: CSVOptions) extends OutputWriter with Logging {
 
-  private val writer = CodecStreams.createOutputStreamWriter(context, new Path(path))
+  private var univocityGenerator: Option[UnivocityGenerator] = None
 
-  private val gen = new UnivocityGenerator(dataSchema, writer, params)
+  if (params.headerFlag) {
+    val gen = getGen()
+    gen.writeHeaders()
+  }
 
-  override def write(row: InternalRow): Unit = gen.write(row)
+  private def getGen(): UnivocityGenerator = univocityGenerator.getOrElse {
+    val charset = Charset.forName(params.charset)
+    val os = CodecStreams.createOutputStreamWriter(context, new Path(path), charset)
+    val newGen = new UnivocityGenerator(dataSchema, os, params)
+    univocityGenerator = Some(newGen)
+    newGen
+  }
 
-  override def close(): Unit = gen.close()
+  override def write(row: InternalRow): Unit = {
+    val gen = getGen()
+    gen.write(row)
+  }
+
+  override def close(): Unit = univocityGenerator.map(_.close())
 }
