@@ -8,7 +8,7 @@ NEW FEATURES
     BUG-92048 Implement loading and visualizing Spark ML pipeline abstracts at Atlas
     BUG-92048 Add switch to enable/disable Spark Atlas Connector
     BUG-96831 Add commit protocol binding to Hadoop 3.1 PathOutputCommitter mechanism.
-    BUG-111820 Spark ML model and pipeline serialization 
+    BUG-111820 Spark ML model and pipeline serialization
 
 IMPROVEMENTS
     RMP-6461: Add --jarDirs and SPARK_APP_JARS to include directories in spark-submit and spark-shell
@@ -58,6 +58,10 @@ BUG FIXES
     SPARK-27620 Upgrade jetty to 9.4.18.v20190429
     SPARK-27757 Bump Jackson to 2.9.9
     [MINOR][DOCS] Add note about Spark network security
+    SPARK-25088 Update Rest Server docs & defaults.
+    SPARK-24418 Upgrade Scala to 2.11.12 and 2.12.6
+    SPARK-24785 Making sure REPL prints Spark UI info and then Welcome message
+    SPARK-27029 Update Thrift to 0.12.0
 
     (Jira in Apache Spark is IN PROGRESS)
     SPARK-23977 BUG-96831 Add commit protocol binding to Hadoop 3.1 PathOutputCommitter mechanism
