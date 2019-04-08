@@ -49,15 +49,12 @@ BUG FIXES
     BUG-109093  HiveThriftServer2 and its SparkContext should be started from keytab
     BUG-109528  Thriftserver not starting in unsecure mode
 
-    (Backport from 2.4.1)
-    SPARK-25767 Fix lazily evaluated stream of expressions in code generation
-    SPARK-25899 Fix flaky CoarseGrainedSchedulerBackendSuite
-    SPARK-25837 Fix potential slowdown in AppStatusListener when cleaning up stages
-    SPARK-25918 LOAD DATA LOCAL INPATH should handle a relative path
+    (Backport from master)
+    SPARK-24601 BUG-109244 Bump Jackson version
+    SPARK-27051 Bump Jackson version to 2.9.8
 
     (Jira in Apache Spark is IN PROGRESS)
     SPARK-23977 BUG-96831 Add commit protocol binding to Hadoop 3.1 PathOutputCommitter mechanism
-    SPARK-24601 BUG-109244 Bump Jackson version
 
     (Security fix in Apache Spark)
     BUG-110890 Fix a security issue createRDDFromFile - large object ser/deserialization between R / JVM
