@@ -52,6 +52,7 @@ BUG FIXES
     (Backport from master)
     SPARK-24601 BUG-109244 Bump Jackson version
     SPARK-27051 Bump Jackson version to 2.9.8
+    [SPARK-25954][SS][FOLLOWUP][TEST-MAVEN] Add Zookeeper 3.4.7 test dependency to Kafka modules
 
     (Jira in Apache Spark is IN PROGRESS)
     SPARK-23977 BUG-96831 Add commit protocol binding to Hadoop 3.1 PathOutputCommitter mechanism
