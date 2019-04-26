@@ -121,3 +121,7 @@ BUG FIXES
     SPARK-23510 Support Hive 2.2 and Hive 2.3 metastore
     SPARK-23518 Avoid metastore access when the users only want to read and write data frames
     SPARK-23635 Spark executor env variable is overwritten by same name AM env variable
+
+    SPARK-24601 Bump Jackson version
+    SPARK-27051 Bump Jackson version to 2.9.8
+ 
