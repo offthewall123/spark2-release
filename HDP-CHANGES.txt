@@ -102,3 +102,4 @@ BUG FIXES
     BUG-110890 Fix a security issue createRDDFromFile - large object ser/deserialization between R / JVM
     BUG-121103 Upgrade jackson-databind to 2.9.9.1
     BUG-122130 Upgrade Jackson to 2.10.0
+  SPARK-27869   Redact sensitive information in System Properties from UI
