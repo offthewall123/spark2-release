@@ -128,3 +128,4 @@ BUG FIXES
     SPARK-26307 Fix CTAS when INSERT a partitioned table using Hive serde
     SPARK-25271 Hive ctas commands should use data source if it is convertible
     SPARK-13704 [CORE][YARN] Reduce rack resolution time
+    SPARK-28005 [YARN] Remove unnecessary log from SparkRackResolver
