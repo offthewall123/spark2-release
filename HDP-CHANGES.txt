@@ -53,8 +53,6 @@ BUG FIXES
     SPARK-24601 BUG-109244 Bump Jackson version
     SPARK-27051 Bump Jackson version to 2.9.8
     [SPARK-25954][SS][FOLLOWUP][TEST-MAVEN] Add Zookeeper 3.4.7 test dependency to Kafka modules
-
-    (Backport from master)
     SPARK-27620 Upgrade jetty to 9.4.18.v20190429
     SPARK-27757 Bump Jackson to 2.9.9
     [MINOR][DOCS] Add note about Spark network security
