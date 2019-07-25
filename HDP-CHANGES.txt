@@ -60,6 +60,7 @@ BUG FIXES
     SPARK-24785 Making sure REPL prints Spark UI info and then Welcome message
     SPARK-27029 Update Thrift to 0.12.0
     SPARK-28004 Update jquery to 3.4.
+    SPARK-28156 Self-join should not miss cached view
 
     (Jira in Apache Spark is IN PROGRESS)
     SPARK-23977 BUG-96831 Add commit protocol binding to Hadoop 3.1 PathOutputCommitter mechanism
