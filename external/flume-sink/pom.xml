@@ -78,6 +78,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <!-- Add Guava in test scope since flume actually needs it. -->
+      <groupId>com.google.guava</groupId>
+      <artifactId>failureaccess</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <!--
         Netty explicitly added in test as it has been excluded from
         Flume dependency (to avoid runtime problems when running with
