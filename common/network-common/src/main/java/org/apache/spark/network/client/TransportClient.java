@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Nullable;
@@ -30,7 +31,6 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
-import com.google.common.util.concurrent.SettableFuture;
 import io.netty.channel.Channel;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
@@ -241,12 +241,12 @@ public class TransportClient implements Closeable {
         copy.put(response);
         // flip "copy" to make it readable
         copy.flip();
-        result.set(copy);
+        result.complete(copy);
       }
 
       @Override
       public void onFailure(Throwable e) {
-        result.setException(e);
+        result.completeExceptionally(e);
       }
     });
 

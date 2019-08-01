@@ -16,9 +16,8 @@
  */
 package org.apache.spark.deploy.k8s.integrationtest
 
-import java.util.concurrent.TimeUnit
+import java.util.concurrent.{CompletableFuture, TimeUnit}
 
-import com.google.common.util.concurrent.SettableFuture
 import io.fabric8.kubernetes.api.model.HasMetadata
 import io.fabric8.kubernetes.client.{KubernetesClientException, Watcher}
 import io.fabric8.kubernetes.client.Watcher.Action
@@ -26,7 +25,7 @@ import io.fabric8.kubernetes.client.internal.readiness.Readiness
 
 private[spark] class SparkReadinessWatcher[T <: HasMetadata] extends Watcher[T] {
 
-  private val signal = SettableFuture.create[Boolean]
+  private val signal = new CompletableFuture[Boolean]
 
   override def eventReceived(action: Action, resource: T): Unit = {
     if ((action == Action.MODIFIED || action == Action.ADDED) &&
