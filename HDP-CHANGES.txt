@@ -69,3 +69,4 @@ BUG FIXES
     BUG-110890 Fix a security issue createRDDFromFile - large object ser/deserialization between R / JVM
     BUG-121103 Upgrade jackson-databind to 2.9.9.1
     BUG-121441 Upgrade jackson-databind to 2.9.9.2
+    BUG-121456 Upgrade jackson-databind to 2.9.9.3
