@@ -77,3 +77,4 @@ BUG FIXES
 
     (Security fix in Apache Spark)
     BUG-110890 Fix a security issue createRDDFromFile - large object ser/deserialization between R / JVM
+    BUG-123663 CDPD-2941 Update shim for alter table rename partition

@@ -31,6 +31,7 @@ import org.apache.hadoop.fs.Path
 import org.apache.hadoop.hive.conf.HiveConf
 import org.apache.hadoop.hive.metastore.api.{EnvironmentContext, Function => HiveFunction, FunctionType}
 import org.apache.hadoop.hive.metastore.api.{MetaException, PrincipalType, ResourceType, ResourceUri}
+import org.apache.hadoop.hive.metastore.api.{Table => TTable}
 import org.apache.hadoop.hive.ql.Driver
 import org.apache.hadoop.hive.ql.io.AcidUtils
 import org.apache.hadoop.hive.ql.metadata.{Hive, HiveException, Partition, Table}
@@ -153,6 +154,12 @@ private[client] sealed abstract class Shim {
       part: JList[String],
       deleteData: Boolean,
       purge: Boolean): Unit
+
+  def renamePartition(
+      hive: Hive,
+      hiveTable: Table,
+      oldSpec: JMap[String, String],
+      hivePart: Partition): Unit
 
   protected def findStaticMethod(klass: Class[_], name: String, args: Class[_]*): Method = {
     val method = findMethod(klass, name, args: _*)
@@ -442,6 +449,14 @@ private[client] class Shim_v0_12 extends Shim with Logging {
 
   def listFunctions(hive: Hive, db: String, pattern: String): Seq[String] = {
     Seq.empty[String]
+  }
+
+  override def renamePartition(
+      hive: Hive,
+      hiveTable: Table,
+      oldSpec: JMap[String, String],
+      hivePart: Partition): Unit = {
+    hive.renamePartition(hiveTable, oldSpec, hivePart)
   }
 }
 
@@ -1250,6 +1265,20 @@ private[client] class Shim_v3_0 extends Shim_v2_3 {
       classOf[EnvironmentContext],
       JBoolean.TYPE)
 
+  private lazy val renamePartitionMethod =
+    findMethod(
+      classOf[Hive],
+      "renamePartition",
+      classOf[Table],
+      classOf[JMap[String, String]],
+      classOf[Partition])
+
+  private lazy val setCatNameMethod =
+    findMethod(
+      classOf[TTable],
+      "setCatName",
+      classOf[String])
+
   override def loadPartition(
       hive: Hive,
       loadPath: Path,
@@ -1323,5 +1352,16 @@ private[client] class Shim_v3_0 extends Shim_v2_3 {
   override def alterPartitions(hive: Hive, tableName: String, newParts: JList[Partition]): Unit = {
     alterPartitionsMethod.invoke(
       hive, tableName, newParts, environmentContextInAlterTable, transactional)
+  }
+
+  override def renamePartition(
+      hive: Hive,
+      hiveTable: Table,
+      oldSpec: JMap[String, String],
+      hivePart: Partition): Unit = {
+    val tTable = hiveTable.getTTable
+    // The line below is due to DWX-866. We'll remove this line when fixed.
+    setCatNameMethod.invoke(tTable, "hive")
+    renamePartitionMethod.invoke(hive, hiveTable, oldSpec, hivePart)
   }
 }
