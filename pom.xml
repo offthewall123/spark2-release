@@ -189,7 +189,7 @@
     ./python/run-tests.py and ./python/setup.py too.
     -->
     <arrow.version>0.8.0</arrow.version>
-    <adl.sdk.version>2.3.3</adl.sdk.version>
+    <adl.sdk.version>2.3.6</adl.sdk.version>
     <gcs.version>1.8.1.2.6.5.3014-SNAPSHOT</gcs.version>
 
     <test.java.home>${java.home}</test.java.home>
