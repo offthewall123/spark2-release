@@ -1,4 +1,4 @@
-Changes only in Hortonworks github and not in Apache SPARK-2.4.0 and hence not covered by CHANGES.txt.
+Changes only in Hortonworks github and not in Apache SPARK-2.4.4 and hence not covered by CHANGES.txt.
 
 INCOMPATIBLE CHANGES
 
@@ -61,12 +61,12 @@ BUG FIXES
     SPARK-27029 Update Thrift to 0.12.0
     SPARK-28004 Update jquery to 3.4.
     SPARK-28156 Self-join should not miss cached view
-
-    (Jira in Apache Spark is IN PROGRESS)
     SPARK-23977 BUG-96831 Add commit protocol binding to Hadoop 3.1 PathOutputCommitter mechanism
+    SPARK-27260 Upgrade to Kafka 2.2.0
 
     (Security fix in Apache Spark)
     BUG-110890 Fix a security issue createRDDFromFile - large object ser/deserialization between R / JVM
     BUG-121103 Upgrade jackson-databind to 2.9.9.1
     BUG-121441 Upgrade jackson-databind to 2.9.9.2
     BUG-121456 Upgrade jackson-databind to 2.9.9.3
+    BUG-121084 Upgrade guava to 28.0-jre
