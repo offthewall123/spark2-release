@@ -286,8 +286,7 @@ private[kafka010] class KafkaTestUtils extends Logging {
   }
 
   private def waitUntilMetadataIsPropagated(topic: String, partition: Int): Unit = {
-    def isPropagated = server.dataPlaneRequestProcessor.metadataCache
-        .getPartitionInfo(topic, partition) match {
+    def isPropagated = server.apis.metadataCache.getPartitionInfo(topic, partition) match {
       case Some(partitionState) =>
         val leader = partitionState.basePartitionState.leader
         val isr = partitionState.basePartitionState.isr
