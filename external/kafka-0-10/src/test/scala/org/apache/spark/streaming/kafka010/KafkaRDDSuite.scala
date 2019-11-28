@@ -98,7 +98,7 @@ class KafkaRDDSuite extends SparkFunSuite with BeforeAndAfterAll {
         log.appendAsLeader(MemoryRecords.withRecords(CompressionType.NONE, simpleRec), 0,
           isFromClient = true)
     }
-    log.roll(messages.length + 1)
+    log.roll(Some(messages.length + 1))
     logs.put(new TopicPartition(topic, partition), log)
 
     val cleaner = new LogCleaner(CleanerConfig(), Array(dir), logs,
