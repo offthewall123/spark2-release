@@ -82,6 +82,7 @@ BUG FIXES
     SPARK-24981 ShutdownHook timeout causes job to fail when succeeded when SparkContext stop() not called by user program
     SPARK-26895 prepareSubmitEnvironment should be called within doAs for proxy users
     SPARK-26895 Uninitializing log after `prepareSubmitEnvironment` in SparkSubmit
+    SPARK-29604 Force initialize SessionState before initializing HiveClient in SparkSQLEnv
 
     (Backport from master)
     SPARK-25271 Hive ctas commands should use data source if it is convertible
