@@ -257,39 +257,34 @@ class MicroBatchExecution(
    */
   private def constructNextBatch(): Unit = {
     // Check to see what new data is available.
-    val hasNewData = {
-      awaitProgressLock.lock()
-      try {
-        // Generate a map from each unique source to the next available offset.
-        val latestOffsets: Map[BaseStreamingSource, Option[Offset]] = uniqueSources.map {
-          case s: Source =>
-            updateStatusMessage(s"Getting offsets from $s")
-            reportTimeTaken("getOffset") {
-              (s, s.getOffset)
-            }
-          case s: MicroBatchReader =>
-            updateStatusMessage(s"Getting offsets from $s")
-            reportTimeTaken("getOffset") {
-            // Once v1 streaming source execution is gone, we can refactor this away.
-            // For now, we set the range here to get the source to infer the available end offset,
-            // get that offset, and then set the range again when we later execute.
-            s.setOffsetRange(
-              toJava(availableOffsets.get(s).map(off => s.deserializeOffset(off.json))),
-              Optional.empty())
+    val hasNewData = withProgressLocked {
+      // Generate a map from each unique source to the next available offset.
+      val latestOffsets: Map[BaseStreamingSource, Option[Offset]] = uniqueSources.map {
+        case s: Source =>
+          updateStatusMessage(s"Getting offsets from $s")
+          reportTimeTaken("getOffset") {
+            (s, s.getOffset)
+          }
+        case s: MicroBatchReader =>
+          updateStatusMessage(s"Getting offsets from $s")
+          reportTimeTaken("getOffset") {
+          // Once v1 streaming source execution is gone, we can refactor this away.
+          // For now, we set the range here to get the source to infer the available end offset,
+          // get that offset, and then set the range again when we later execute.
+          s.setOffsetRange(
+            toJava(availableOffsets.get(s).map(off => s.deserializeOffset(off.json))),
+            Optional.empty())
 
-              (s, Some(s.getEndOffset))
-            }
-        }.toMap
-        availableOffsets ++= latestOffsets.filter { case (_, o) => o.nonEmpty }.mapValues(_.get)
+            (s, Some(s.getEndOffset))
+          }
+      }.toMap
+      availableOffsets ++= latestOffsets.filter { case (_, o) => o.nonEmpty }.mapValues(_.get)
 
-        if (dataAvailable) {
-          true
-        } else {
-          noNewData = true
-          false
-        }
-      } finally {
-        awaitProgressLock.unlock()
+      if (dataAvailable) {
+        true
+      } else {
+        noNewData = true
+        false
       }
     }
     if (hasNewData) {
@@ -370,12 +365,9 @@ class MicroBatchExecution(
         }
       }
     } else {
-      awaitProgressLock.lock()
-      try {
+      withProgressLocked {
         // Wake up any threads that are waiting for the stream to progress.
         awaitProgressLockCondition.signalAll()
-      } finally {
-        awaitProgressLock.unlock()
       }
     }
   }
@@ -480,16 +472,23 @@ class MicroBatchExecution(
       }
     }
 
-    awaitProgressLock.lock()
-    try {
+    withProgressLocked {
       // Wake up any threads that are waiting for the stream to progress.
       awaitProgressLockCondition.signalAll()
-    } finally {
-      awaitProgressLock.unlock()
     }
   }
 
   private def toJava(scalaOption: Option[OffsetV2]): Optional[OffsetV2] = {
     Optional.ofNullable(scalaOption.orNull)
+  }
+
+  /** Execute a function while locking the stream from making an progress */
+  private[sql] def withProgressLocked[T](f: => T): T = {
+    awaitProgressLock.lock()
+    try {
+      f
+    } finally {
+      awaitProgressLock.unlock()
+    }
   }
 }
