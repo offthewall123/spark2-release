@@ -57,3 +57,4 @@ BUG FIXES
     SPARK-23679 Setting RM_HA_URLS for AmIpFilter to avoid redirect failure in YARN mode
     SPARK-25183 Spark HiveServer2 registers shutdown hook with JVM, not ShutdownHookManager.
     SPARK-23654 Cut jets3t as a dependency of spark-core
+  SPARK-30993   Use its sql type for UDT when checking the type of length (fixed/var) or mutable
