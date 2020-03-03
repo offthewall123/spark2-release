@@ -61,3 +61,4 @@ BUG FIXES
 
     (Security fix in Apache Spark)
     BUG-110890 Fix a security issue createRDDFromFile - large object ser/deserialization between R / JVM
+  SPARK-30993   Use its sql type for UDT when checking the type of length (fixed/var) or mutable
