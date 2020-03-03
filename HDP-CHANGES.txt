@@ -70,3 +70,4 @@ BUG FIXES
     BUG-121441 Upgrade jackson-databind to 2.9.9.2
     BUG-121456 Upgrade jackson-databind to 2.9.9.3
     BUG-121084 Upgrade guava to 28.0-jre
+  SPARK-30993   Use its sql type for UDT when checking the type of length (fixed/var) or mutable
