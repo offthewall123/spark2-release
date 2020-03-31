@@ -97,4 +97,4 @@ BUG FIXES
     (Jira in Apache Spark is IN PROGRESS)
     SPARK-23977 Add commit protocol binding to Hadoop 3.1 PathOutputCommitter mechanism
     SPARK-24601 BUG-109244 Bump Jackson version
-  SPARK-30993   Use its sql type for UDT when checking the type of length (fixed/var) or mutable
+
