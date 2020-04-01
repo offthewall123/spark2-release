@@ -452,7 +452,7 @@ trait StreamTest extends QueryTest with SharedSQLContext with TimeLimits with Be
       // Block until all data added has been processed for all the source
       awaiting.foreach { case (sourceIndex, offset) =>
         failAfter(streamingTimeout) {
-          currentStream.awaitOffset(sourceIndex, offset, streamingTimeout.toMillis)
+          currentStream.awaitOffset(sourceIndex, offset, 100)
           // Make sure all processing including no-data-batches have been executed
           if (!currentStream.triggerClock.isInstanceOf[StreamManualClock]) {
             currentStream.processAllAvailable()
